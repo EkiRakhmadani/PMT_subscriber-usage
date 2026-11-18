@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Usage;
 
 class Subscriber extends Model
 {
@@ -12,6 +13,7 @@ class Subscriber extends Model
     protected $table = 'subscribers';
 
     protected $fillable = [
+        'id',
         'name',
         'plan',
         'activation_date',

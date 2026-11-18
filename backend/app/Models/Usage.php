@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Subscriber;
 
 class Usage extends Model
 {
@@ -20,7 +21,7 @@ class Usage extends Model
         'recorded_at' => 'datetime',
     ];
 
-    public function subsciber() {
+    public function subscriber() {
         return $this->belongsTo(Subscriber::class, 'subscriber_id', 'id');
     }
 }

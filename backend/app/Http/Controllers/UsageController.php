@@ -33,7 +33,7 @@ class UsageController extends Controller
 
         return response()->json([
             'data' => $usages->map(function ($usage) {
-                $this->format($usage);
+                return $this->format($usage);
             })
         ]);
     }
@@ -48,7 +48,7 @@ class UsageController extends Controller
         ]);
 
         $usage = Usage::create([
-            'subcriber_id' => $validated['subscriberId'],
+            'subscriber_id' => $validated['subscriberId'],
             'call_minutes' => $validated['callMinutes'],
             'sms_count' => $validated['smsCount'],
             'data_usage_mb' => $validated['dataUsageMB'],
