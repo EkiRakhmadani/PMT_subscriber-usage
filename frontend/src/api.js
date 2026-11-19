@@ -1,7 +1,8 @@
 const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api';
 
+// Get subscribers datas.
 export async function getSubscribers() {
-    const res = await fetch(`${API_URL}/subsribers`);
+    const res = await fetch(`${API_URL}/subscribers`);
     if (!res.ok) {
         throw new Error('Failed to load subscribers')
     }
@@ -12,6 +13,7 @@ export async function getSubscribers() {
     return json.data;
 }
 
+// Get usages data, single or multiple as a lists.
 export async function getUsages(subscriberId) {
     let url = `${API_URL}/usages`;
 
@@ -30,6 +32,7 @@ export async function getUsages(subscriberId) {
     return json.data;
 }
 
+// Post a new usage data.
 export async function createUsage(usageData) {
     const res = await fetch(`${API_URL}/usages`, {
         method: 'POST',
@@ -40,13 +43,13 @@ export async function createUsage(usageData) {
         body: JSON.stringify(usageData),
     })
 
+    const json = await res.json();
+
     if (!res.ok) {
         const err = new Error(json.message || 'Failed to create usage');
         err.errors = json.errors || {};
         throw err;
     }
-
-    const json = await res.json();
 
     console.log(json.data);
     return json.data;
