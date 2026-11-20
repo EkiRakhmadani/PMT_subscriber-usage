@@ -21,4 +21,28 @@ class SubscriberController extends Controller
 
         return response()->json(['data' => $data]);
     }
+
+    public function store(Request $request) {
+        $validated = $request->validate([
+            'name' => 'required|string|max:100',
+            'plan' => 'required|in:Basic,Premium,Family',
+            'activationDate' => 'required|date_format:Y-m-d',
+        ]);
+
+        $subscriber = Subscriber::create([
+            'name' => $validated['name'],
+            'plan' => $validated['plan'],
+            'activation_date' => $validated['activationDate'],
+        ]);
+
+        return response()->json([
+            'message' => 'Subscriber created',
+            'data' => [
+                'id' => $subscriber->id,
+                'name' => $subscriber->name,
+                'plan' => $subscriber->plan,
+                'activationDate' => $subscriber->activation_date->format('Y-m-d'),
+            ],
+        ], 201);
+    }
 }
