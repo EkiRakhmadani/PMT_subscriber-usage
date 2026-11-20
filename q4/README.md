@@ -51,3 +51,6 @@ node --test q4/
 
 ## Cara mencegah
 
+- Selalu isi initial value di `reduce`, misalnya `0` untuk operasi aritmatika.
+- Kalau callback menggunakan `{}` pastikan selalu ada `return`.
+
