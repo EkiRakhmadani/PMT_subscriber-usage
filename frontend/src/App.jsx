@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { getSubscribers, getUsages } from './api';
 import UsageForm from './components/UsageForm';
 import UsageTable from './components/UsageTable';
+import SubscriberForm from './components/SubscriberForm';
+
 
 function App() {
   const [subscribers, setSubscribers] = useState([]);
@@ -10,12 +12,14 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [refresh, setRefresh] = useState(0);
+  const [subscriberRefresh, setSubscriberRefresh] = useState(0);
+
 
   useEffect(() => {
     getSubscribers()
       .then((data) => setSubscribers(data))
       .catch((err) => setError(err.message));
-  }, []);
+  }, [subscriberRefresh]);
 
   useEffect(() => {
     getUsages(filter)
@@ -36,6 +40,11 @@ function App() {
     setRefresh(refresh + 1);
   }
 
+  function handleSubscriberCreated() {
+    setSubscriberRefresh(subscriberRefresh + 1);
+  }
+
+
   return (
     <div className="container">
       <header>
@@ -46,7 +55,10 @@ function App() {
       {error && <p className="error">{error}</p>}
 
       <div className="grid">
-        <UsageForm subscribers={subscribers} onCreated={handleCreated} />
+        <div className="side">
+          <SubscriberForm onCreated={handleSubscriberCreated} />
+          <UsageForm subscribers={subscribers} onCreated={handleCreated} />
+        </div>
         <UsageTable
           usages={usages}
           subscribers={subscribers}

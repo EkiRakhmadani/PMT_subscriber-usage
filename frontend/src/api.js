@@ -13,6 +13,29 @@ export async function getSubscribers() {
     return json.data;
 }
 
+// Post subscriber.
+export async function createSubscriber(subscriberData) {
+    const res = await fetch(`${API_URL}/subscribers`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+        },
+        body: JSON.stringify(subscriberData),
+    });
+
+    const json = await res.json();
+
+    if (!res.ok) {
+        const err = new Error(json.message || 'Failed to create subscriber');
+        err.errors = json.errors || {};
+        throw err;
+    }
+
+    console.log(json.data);
+    return json.data;
+}
+
 // Get usages data, single or multiple as a lists.
 export async function getUsages(subscriberId) {
     let url = `${API_URL}/usages`;
