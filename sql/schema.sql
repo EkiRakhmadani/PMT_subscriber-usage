@@ -9,7 +9,9 @@ CREATE TABLE subscribers (
     id VARCHAR(10) PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     plan VARCHAR(20) NOT NULL,
-    activation_date DATE NOT NULL
+    activation_date DATE NOT NULL,
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE TABLE usages (
@@ -19,16 +21,18 @@ CREATE TABLE usages (
     sms_count INT NOT NULL DEFAULT 0,
     data_usage_mb INT NOT NULL DEFAULT 0,
     recorded_at DATETIME NOT NULL,
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     FOREIGN KEY (subscriber_id) REFERENCES subscribers(id)
 );
 
 INSERT INTO subscribers (id, name, plan, activation_date) VALUES
-('SUBS01', 'Amir', 'Basic', STR_TO_DATE('12-Jan-23', '%d-%b-%y')),
-('SUBS02', 'Sari', 'Premium', STR_TO_DATE('03-May-22', '%d-%b-%y')),
-('SUBS03', 'Budi', 'Basic', STR_TO_DATE('20-Sep-24', '%d-%b-%y')),
-('SUB04', 'Dewi', 'Family', STR_TO_DATE('15-Feb-21', '%d-%b-%y')),
-('SUB05', 'Rian', 'Premium', STR_TO_DATE('08-Aug-23', '%d-%b-%y')),
-('SUB06', 'Nia', 'Basic', STR_TO_DATE('30-Nov-24', '%d-%b-%y'));
+('SUB01', 'Amir', 'Basic', '2023-01-12'),
+('SUB02', 'Sari', 'Premium', '2022-05-03'),
+('SUB03', 'Budi', 'Basic', '2024-09-20'),
+('SUB04', 'Dewi', 'Family', '2021-02-15'),
+('SUB05', 'Rian', 'Premium', '2023-08-08'),
+('SUB06', 'Nia', 'Basic', '2024-11-30');
 
 INSERT INTO usages (subscriber_id, call_minutes, sms_count, data_usage_mb, recorded_at) VALUES
 ('SUB01', 40, 10, 1500, '2025-08-01 08:00:00'),
