@@ -32,7 +32,7 @@ function getTotalUsageMB(records) {
 }
 ```
 
-- Ditambahkan `return` supaya hasil penjumlahan sebagai `total` di loop berikutnya.
+- Ditambahkan `return` supaya hasil penjumlahan dipakai sebagai `total` di loop berikutnya.
 - Ditambahkan `0` sebagai default value.
 - Fallback `|| 0` sebagai gate apabila record tidak punya `dataUsageMB` akan dihitung 0, bukan `NaN`.
 
