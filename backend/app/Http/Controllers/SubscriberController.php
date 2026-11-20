@@ -15,7 +15,7 @@ class SubscriberController extends Controller
                 'id' => $sub->id,
                 'name' => $sub->name,
                 'plan' => $sub->plan,
-                'activationDate' => $sub->activation_date,
+                'activationDate' => $sub->activation_date->format('Y-m-d'),
             ];
         });
 
