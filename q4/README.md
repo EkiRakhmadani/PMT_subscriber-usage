@@ -24,7 +24,7 @@ Ada 2 kesalahan:
 
 ```js
 function getTotalUsageMB(records) {
-    return records.recude((total, record) => {
+    return records.reduce((total, record) => {
         const usage = record.dataUsageMB || 0;
         
         return total + usage;
